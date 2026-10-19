@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Aniversário do Bruno + Halloween a Fantasia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap">
+<style>
+/* Layout: poster de sideshow numa coluna só. Marquise de lâmpadas, dois atos (pub verde, freakshow vermelho), linha do tempo arrastável, ingresso destacado, confirmação que grava numa base e painel de bastidores só para o anfitrião. Escolha deliberada de um único visual escuro. */
+:root {
+  --ink: #140e10;
+  --ink-2: #1f1518;
+  --line: #3d2c30;
+  --bone: #f0e7d4;
+  --bone-dim: #b8aa92;
+  --gold: #e2ab3c;
+  --green: #34b274;
+  --green-deep: #123b2a;
+  --red: #e0414b;
+  --red-deep: #4a1218;
+  --f-display: 'Rye', Georgia, 'Times New Roman', serif;
+  --f-body: 'Barlow Semi Condensed', 'Arial Narrow', Arial, sans-serif;
+  --f-type: 'Special Elite', 'Courier New', monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 60% at 15% 0%, rgba(52,178,116,.16), transparent 60%),
+    radial-gradient(120% 60% at 90% 12%, rgba(224,65,75,.16), transparent 60%),
+    var(--ink);
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.45;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; font-weight: 400; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* marquise */
+.poster {
+  position: relative;
+  border: 2px solid var(--gold);
+  background: var(--ink-2);
+  padding: 38px 18px 30px;
+  text-align: center;
+}
+.poster::before, .poster::after {
+  content: "";
+  position: absolute; left: 6px; right: 6px; height: 16px;
+  background: radial-gradient(circle, var(--gold) 0 3px, transparent 3.6px) 0 50% / 18px 16px repeat-x;
+}
+.poster::before { top: 6px; animation: blink 1.4s steps(1) infinite; }
+.poster::after { bottom: 6px; animation: blink 1.4s steps(1) infinite reverse; }
+@keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+.eyebrow { font-family: var(--f-type); font-size: .9rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.presents { font-family: var(--f-type); margin-top: 14px; color: var(--bone-dim); font-size: 1.05rem; }
+h1 { font-family: var(--f-display); margin-top: 6px; line-height: 1.02; display: flex; flex-direction: column; align-items: center; }
+h1 .g { color: var(--green); font-size: clamp(2.1rem, 10vw, 3.5rem); text-align: center; text-wrap: balance; }
+h1 .plus { color: var(--gold); font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1; }
+h1 .r { color: var(--red); font-size: clamp(2.1rem, 10vw, 3.5rem); text-align: center; text-wrap: balance; }
+.tagline { margin-top: 14px; display: inline-block; padding: 6px 14px; border: 2px solid var(--gold); font-family: var(--f-type); font-size: 1.05rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.shamrock { width: 38px; height: 38px; margin: 0 auto 6px; display: block; }
+.hero-actions { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+.count { margin-top: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.count-label { font-family: var(--f-type); font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--bone-dim); margin-top: 24px; }
+.count .cell { min-width: 74px; padding: 8px 10px 6px; border: 1px solid var(--line); background: var(--ink); }
+.count .n { display: block; font-family: var(--f-type); font-size: 2rem; line-height: 1.1; color: var(--bone); font-variant-numeric: tabular-nums; }
+.count .u { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--bone-dim); }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 10px 18px;
+  font: 600 1rem var(--f-body); letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  border: 2px solid var(--gold); background: var(--gold); color: var(--ink);
+  transition: transform .12s ease, background .12s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--bone); border-color: var(--bone-dim); }
+.btn.green { background: var(--green); border-color: var(--green); color: var(--ink); }
+.btn.red { background: var(--red); border-color: var(--red); color: var(--ink); }
+.btn.wide { width: 100%; }
+.btn:disabled { opacity: .6; cursor: default; transform: none; }
+
+/* atos */
+.section-title { font-family: var(--f-display); font-size: 1.7rem; color: var(--bone); }
+.acts { display: grid; gap: 16px; }
+.act {
+  position: relative; background: var(--ink-2); border: 1px solid var(--line);
+  padding: 26px 18px 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.act::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; }
+.act.one::before { background: var(--green); }
+.act.two::before { background: repeating-linear-gradient(90deg, var(--red) 0 16px, var(--bone) 16px 32px); }
+.act-tag { font-family: var(--f-type); font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; }
+.one .act-tag { color: var(--green); }
+.two .act-tag { color: var(--red); }
+.act h3 { font-family: var(--f-display); font-size: 1.6rem; line-height: 1.1; }
+.act .time { font-family: var(--f-type); font-size: 1.15rem; color: var(--gold); }
+.act .addr { color: var(--bone-dim); }
+.act .note { font-size: 1rem; }
+.act .btn { align-self: flex-start; margin-top: 6px; }
+.act[data-active="true"].one { border-color: var(--green); box-shadow: 0 0 0 2px var(--green); }
+.act[data-active="true"].two { border-color: var(--red); box-shadow: 0 0 0 2px var(--red); }
+
+/* linha do tempo */
+.night { border: 1px solid var(--line); padding: 20px 18px; background: var(--ink-2); display: flex; flex-direction: column; gap: 12px; }
+.night p.hint { color: var(--bone-dim); font-size: .98rem; }
+.clock { font-family: var(--f-type); font-size: 2.2rem; color: var(--gold); line-height: 1; font-variant-numeric: tabular-nums; }
+#status { min-height: 3em; font-size: 1.1rem; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 30px; background: transparent; margin: 0; }
+input[type=range]::-webkit-slider-runnable-track { height: 8px; background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%); }
+input[type=range]::-moz-range-track { height: 8px; background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -8px; border-radius: 50%; background: var(--gold); border: 3px solid var(--ink); box-shadow: 0 0 0 2px var(--gold); }
+input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--gold); border: 3px solid var(--ink); box-shadow: 0 0 0 2px var(--gold); }
+.scale { display: flex; justify-content: space-between; font-family: var(--f-type); font-size: .85rem; color: var(--bone-dim); }
+
+/* ingresso */
+.ticket { position: relative; overflow: hidden; background: var(--gold); color: var(--ink); padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+.ticket .stamp { font-family: var(--f-type); letter-spacing: .18em; text-transform: uppercase; font-size: .9rem; }
+.ticket h2 { font-family: var(--f-display); font-size: 1.6rem; line-height: 1.1; }
+.ticket p { font-size: 1.05rem; }
+.ticket .perf { position: relative; margin-inline: -20px; border-top: 2px dashed var(--ink); height: 0; }
+.ticket .perf::before, .ticket .perf::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); }
+.ticket .perf::before { left: -11px; }
+.ticket .perf::after { right: -11px; }
+.ticket .btn { background: var(--ink); color: var(--gold); border-color: var(--ink); align-self: flex-start; }
+
+/* confirmação */
+.rsvp { border: 2px solid var(--green); background: var(--ink-2); padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; }
+.rsvp .notice { font-size: 1.15rem; }
+.costume-note { padding: 12px 14px; border: 2px dashed var(--gold); font-family: var(--f-type); font-size: 1rem; color: var(--gold); }
+
+footer { text-align: center; font-family: var(--f-type); color: var(--bone-dim); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .poster::before, .poster::after { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="poster">
+    <svg class="shamrock" viewBox="-30 -34 60 70" aria-hidden="true">
+      <g fill="#34b274">
+        <path d="M0 0 C-9 -7 -9 -17 -3 -17 C-1 -17 0 -15 0 -14 C0 -15 1 -17 3 -17 C9 -17 9 -7 0 0Z" transform="scale(1.5)"/>
+        <path d="M0 0 C-9 -7 -9 -17 -3 -17 C-1 -17 0 -15 0 -14 C0 -15 1 -17 3 -17 C9 -17 9 -7 0 0Z" transform="rotate(120) scale(1.5)"/>
+        <path d="M0 0 C-9 -7 -9 -17 -3 -17 C-1 -17 0 -15 0 -14 C0 -15 1 -17 3 -17 C9 -17 9 -7 0 0Z" transform="rotate(240) scale(1.5)"/>
+      </g>
+      <path d="M0 0 C2 12 6 20 12 30" stroke="#34b274" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <p class="eyebrow">Sábado · 31 de outubro · Noite de Halloween</p>
+    <p class="presents">O Bruno convida, em dois atos</p>
+    <h1><span class="g">Comemoração de aniversário</span><span class="plus">+</span><span class="r">Halloween a fantasia</span></h1>
+    <p class="tagline">Esquenta no pub · After na Casa da Luz</p>
+
+    <p class="count-label">Sobe o pano em</p>
+    <div class="count" id="count" role="timer" aria-live="off">
+      <div class="cell"><span class="n" id="cd-d">13</span><span class="u">dias</span></div>
+      <div class="cell"><span class="n" id="cd-h">00</span><span class="u">horas</span></div>
+      <div class="cell"><span class="n" id="cd-m">00</span><span class="u">min</span></div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o+de+anivers%C3%A1rio+%2B+Halloween+a+fantasia&dates=20261031T230000Z/20261101T060000Z&details=Festa+de+Halloween+a+fantasia.+Esquenta+no+O%27Malley%27s+a+partir+das+20h.+After+na+Casa+da+Luz+a+partir+das+23h.+Ingresso+antecipado+para+o+after.&location=O%27Malley%27s+Bar%2C+Alameda+Itu%2C+1529+-+Jardins%2C+S%C3%A3o+Paulo">Salvar na agenda</a>
+      <a class="btn ghost" href="#confirmar">Confirmar presença</a>
+    </div>
+  </header>
+
+  <section aria-labelledby="atos">
+    <h2 class="section-title" id="atos" style="margin-bottom:14px">A noite em dois atos</h2>
+    <div class="acts">
+      <article class="act one" id="act1" data-active="false">
+        <span class="act-tag">Ato I · Esquenta</span>
+        <h3>O'Malley's Bar</h3>
+        <p class="time">A partir das 20h</p>
+        <p class="addr">Alameda Itu, 1529 · Jardins</p>
+        <p class="note">Chega cedo pra gente pegar mesa junto.</p>
+        <a class="btn green" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=O%27Malley%27s+Bar+Alameda+Itu+1529+Jardins+S%C3%A3o+Paulo">Ver no mapa</a>
+      </article>
+
+      <article class="act two" id="act2" data-active="false">
+        <span class="act-tag">Ato II · After · Halloween a fantasia</span>
+        <h3>Egrégora: Freakshow</h3>
+        <p class="time">A partir das 23h</p>
+        <p class="addr">Casa da Luz · Rua Mauá, 512 · Centro</p>
+        <p class="note">Capriche na fantasia. Ingresso comprado com antecedência.</p>
+        <a class="btn red" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Casa+da+Luz+Rua+Mau%C3%A1+512+Centro+S%C3%A3o+Paulo">Ver no mapa</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="night" aria-labelledby="noite">
+    <h2 class="section-title" id="noite">Arraste a noite</h2>
+    <p class="hint">Mova o marcador e veja onde a gente vai estar.</p>
+    <div class="clock" id="clock">20h</div>
+    <p id="status" aria-live="polite"></p>
+    <input type="range" id="night" min="0" max="12" step="1" value="0" aria-label="Horário da noite, de 20h até a madrugada">
+    <div class="scale"><span>20h</span><span>23h</span><span>madrugada</span></div>
+  </section>
+
+  <section class="ticket" id="ingresso" aria-labelledby="ing">
+    <span class="stamp">Admit one · só pro after</span>
+    <h2 id="ing">Sem ingresso, sem festa</h2>
+    <p>Quem vai pra festa precisa comprar o ingresso com antecedência.</p>
+    <div class="perf" aria-hidden="true"></div>
+    <a class="btn" id="ticketBtn" target="_blank" rel="noopener" href="https://shotgun.live/events/egregora-freak-show?uhandle=brunoma190&utm_campaign=share_event&utm_term=brunoma190">Garantir ingresso no Shotgun</a>
+  </section>
+
+  <section class="rsvp" id="confirmar" aria-labelledby="conf">
+    <h2 class="section-title" id="conf">Sua entrada em cena</h2>
+    <p class="notice">Confirme sua presença pelo WhatsApp, para eu ter uma noção de quantos seremos no pub.</p>
+    <p class="costume-note">Capriche na fantasia ou sinta-se à vontade para ir sem e só curtir a noite.</p>
+  </section>
+
+  <footer>31/10 · Jardins → Centro · venha curtir a noite ☘️🎪</footer>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+
+  /* contagem regressiva até 31/10 às 20h (Brasília) */
+  var target = new Date('2026-10-31T20:00:00-03:00').getTime();
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      $('cd-d').textContent = '00'; $('cd-h').textContent = '00'; $('cd-m').textContent = '00';
+      return;
+    }
+    var mins = Math.floor(diff / 60000);
+    $('cd-d').textContent = Math.floor(mins / 1440);
+    $('cd-h').textContent = pad(Math.floor((mins % 1440) / 60));
+    $('cd-m').textContent = pad(mins % 60);
+  }
+  tick();
+  setInterval(tick, 30000);
+
+  /* linha do tempo */
+  var lines = [
+    "Chegando no O'Malley's. Quem vem cedo ajuda a juntar as mesas.",
+    'Primeiro pint e os primeiros brindes.',
+    'Mesa cheia, a noite esquentando.',
+    'Hora de rir alto e pedir mais uma rodada.',
+    'Última chamada de fotos antes de sair do pub.',
+    'Fecha a conta e pede o carro. O after começa em meia hora.',
+    'Portas abertas na Casa da Luz. Ingresso no celular!',
+    'Festa rolando. Hora de a fantasia brilhar.',
+    'Meia-noite no Centro. O espetáculo está só começando.',
+    'Pista, luz e gente esquisita, no bom sentido.',
+    'Já é domingo e ninguém quer ir embora.',
+    'Festa a todo vapor.',
+    'Quem sobrou é da família.'
+  ];
+  var slider = $('night');
+  function updateNight() {
+    var i = +slider.value;
+    var mins = 20 * 60 + i * 30;
+    var h = Math.floor(mins / 60) % 24, m = mins % 60;
+    $('clock').textContent = pad(h) + 'h' + (m ? pad(m) : '');
+    $('status').textContent = lines[i];
+    var atPub = i < 6;
+    $('act1').setAttribute('data-active', atPub ? 'true' : 'false');
+    $('act2').setAttribute('data-active', atPub ? 'false' : 'true');
+  }
+  slider.addEventListener('input', updateNight);
+  updateNight();
+})();
+</script>
+
+</body>
+</html>

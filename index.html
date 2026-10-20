@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap">
 <style>
-/* Layout: poster de sideshow numa coluna só. Marquise de lâmpadas, dois atos (pub verde, freakshow vermelho), linha do tempo arrastável, ingresso destacado, confirmação que grava numa base e painel de bastidores só para o anfitrião. Escolha deliberada de um único visual escuro. */
+/* Layout: poster de sideshow numa coluna só. Marquise de lâmpadas, local único (pub verde), dois atos que são as duas bandas, linha do tempo arrastável, ingresso com os dois valores e regras da fantasia. Escolha deliberada de um único visual escuro. */
 :root {
   --ink: #140e10;
   --ink-2: #1f1518;
@@ -23,7 +23,6 @@
   --green: #34b274;
   --green-deep: #123b2a;
   --red: #e0414b;
-  --red-deep: #4a1218;
   --f-display: 'Rye', Georgia, 'Times New Roman', serif;
   --f-body: 'Barlow Semi Condensed', 'Arial Narrow', Arial, sans-serif;
   --f-type: 'Special Elite', 'Courier New', monospace;
@@ -96,12 +95,17 @@ h1 .r { color: var(--red); font-size: clamp(2.1rem, 10vw, 3.5rem); text-align: c
 .btn:hover { transform: translateY(-2px); }
 .btn.ghost { background: transparent; color: var(--bone); border-color: var(--bone-dim); }
 .btn.green { background: var(--green); border-color: var(--green); color: var(--ink); }
-.btn.red { background: var(--red); border-color: var(--red); color: var(--ink); }
-.btn.wide { width: 100%; }
-.btn:disabled { opacity: .6; cursor: default; transform: none; }
 
-/* atos */
+/* local e atos */
 .section-title { font-family: var(--f-display); font-size: 1.7rem; color: var(--bone); }
+.venue { position: relative; background: var(--ink-2); border: 2px solid var(--green); padding: 26px 18px 18px; display: flex; flex-direction: column; gap: 8px; }
+.venue::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--green); }
+.tag { font-family: var(--f-type); font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
+.venue h2 { font-family: var(--f-display); font-size: 1.9rem; line-height: 1.1; }
+.venue .time { font-family: var(--f-type); font-size: 1.15rem; color: var(--gold); }
+.venue .addr { color: var(--bone-dim); }
+.venue .btn { align-self: flex-start; margin-top: 6px; }
+
 .acts { display: grid; gap: 16px; }
 .act {
   position: relative; background: var(--ink-2); border: 1px solid var(--line);
@@ -116,9 +120,7 @@ h1 .r { color: var(--red); font-size: clamp(2.1rem, 10vw, 3.5rem); text-align: c
 .two .act-tag { color: var(--red); }
 .act h3 { font-family: var(--f-display); font-size: 1.6rem; line-height: 1.1; }
 .act .time { font-family: var(--f-type); font-size: 1.15rem; color: var(--gold); }
-.act .addr { color: var(--bone-dim); }
-.act .note { font-size: 1rem; }
-.act .btn { align-self: flex-start; margin-top: 6px; }
+.act .note { font-size: 1rem; color: var(--bone-dim); }
 .act[data-active="true"].one { border-color: var(--green); box-shadow: 0 0 0 2px var(--green); }
 .act[data-active="true"].two { border-color: var(--red); box-shadow: 0 0 0 2px var(--red); }
 
@@ -128,8 +130,8 @@ h1 .r { color: var(--red); font-size: clamp(2.1rem, 10vw, 3.5rem); text-align: c
 .clock { font-family: var(--f-type); font-size: 2.2rem; color: var(--gold); line-height: 1; font-variant-numeric: tabular-nums; }
 #status { min-height: 3em; font-size: 1.1rem; }
 input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 30px; background: transparent; margin: 0; }
-input[type=range]::-webkit-slider-runnable-track { height: 8px; background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%); }
-input[type=range]::-moz-range-track { height: 8px; background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%); }
+input[type=range]::-webkit-slider-runnable-track { height: 8px; background: linear-gradient(90deg, var(--green) 78%, var(--red) 78%); }
+input[type=range]::-moz-range-track { height: 8px; background: linear-gradient(90deg, var(--green) 78%, var(--red) 78%); }
 input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -8px; border-radius: 50%; background: var(--gold); border: 3px solid var(--ink); box-shadow: 0 0 0 2px var(--gold); }
 input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--gold); border: 3px solid var(--ink); box-shadow: 0 0 0 2px var(--gold); }
 .scale { display: flex; justify-content: space-between; font-family: var(--f-type); font-size: .85rem; color: var(--bone-dim); }
@@ -143,17 +145,38 @@ input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 
 .ticket .perf::before, .ticket .perf::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); }
 .ticket .perf::before { left: -11px; }
 .ticket .perf::after { right: -11px; }
-.ticket .btn { background: var(--ink); color: var(--gold); border-color: var(--ink); align-self: flex-start; }
+.prices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.price { border: 2px solid var(--ink); padding: 10px 12px 8px; display: flex; flex-direction: column; gap: 2px; }
+.price.hot { background: var(--ink); color: var(--gold); }
+.price .l { font-family: var(--f-type); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; }
+.price .v { font-family: var(--f-display); font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+/* regras da fantasia */
+.rules { border: 1px solid var(--line); background: var(--ink-2); padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; }
+.rule { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+.rule .mark { font-family: var(--f-display); font-size: 1.5rem; line-height: 1; color: var(--gold); min-width: 1.6rem; text-align: center; }
+.rule p { font-size: 1.08rem; }
+.rule b { font-weight: 600; color: var(--gold); }
 
 /* confirmação */
-.rsvp { border: 2px solid var(--green); background: var(--ink-2); padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; }
-.rsvp .notice { font-size: 1.15rem; }
-.costume-note { padding: 12px 14px; border: 2px dashed var(--gold); font-family: var(--f-type); font-size: 1rem; color: var(--gold); }
+.rsvp { position: relative; border: 2px solid var(--gold); background: var(--ink-2); padding: 28px 18px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.rsvp::before { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 12px; background: radial-gradient(circle, var(--gold) 0 2.5px, transparent 3px) 0 50% / 16px 12px repeat-x; }
+.rsvp .section-title { color: var(--gold); }
+.rsvp .lead { font-size: 1.2rem; max-width: 30em; }
+.rsvp .notice { font-size: 1.05rem; color: var(--bone-dim); max-width: 30em; }
+.cake { width: 92px; height: 92px; display: block; margin-top: 8px; }
+.cake .body { fill: var(--green-deep); stroke: var(--gold); stroke-width: 2; }
+.cake .icing { fill: var(--red); }
+.cake .candle { fill: var(--bone); }
+.cake .flame { fill: var(--gold); transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.1s ease-in-out infinite; }
+.cake .flame:nth-of-type(2) { animation-delay: .25s; }
+.cake .flame:nth-of-type(3) { animation-delay: .5s; }
+@keyframes flicker { 0%,100% { transform: scale(1,1) } 50% { transform: scale(1.18,.88) } }
 
-footer { text-align: center; font-family: var(--f-type); color: var(--bone-dim); font-size: .95rem; }
+footer { text-align: center; font-family: var(--f-type); color: var(--bone); font-size: 1.05rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .poster::before, .poster::after { animation: none; }
+  .poster::before, .poster::after, .cake .flame { animation: none; }
   .btn { transition: none; }
 }
 </style>
@@ -172,68 +195,97 @@ footer { text-align: center; font-family: var(--f-type); color: var(--bone-dim);
     <p class="eyebrow">Sábado · 31 de outubro · Noite de Halloween</p>
     <p class="presents">O Bruno convida, em dois atos</p>
     <h1><span class="g">Comemoração de aniversário</span><span class="plus">+</span><span class="r">Halloween a fantasia</span></h1>
-    <p class="tagline">Esquenta no pub · After na Casa da Luz</p>
+    <p class="tagline">No O'Malley's · a partir das 20h</p>
 
     <p class="count-label">Sobe o pano em</p>
     <div class="count" id="count" role="timer" aria-live="off">
-      <div class="cell"><span class="n" id="cd-d">13</span><span class="u">dias</span></div>
+      <div class="cell"><span class="n" id="cd-d">11</span><span class="u">dias</span></div>
       <div class="cell"><span class="n" id="cd-h">00</span><span class="u">horas</span></div>
       <div class="cell"><span class="n" id="cd-m">00</span><span class="u">min</span></div>
     </div>
 
     <div class="hero-actions">
-      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o+de+anivers%C3%A1rio+%2B+Halloween+a+fantasia&dates=20261031T230000Z/20261101T060000Z&details=Festa+de+Halloween+a+fantasia.+Esquenta+no+O%27Malley%27s+a+partir+das+20h.+After+na+Casa+da+Luz+a+partir+das+23h.+Ingresso+antecipado+para+o+after.&location=O%27Malley%27s+Bar%2C+Alameda+Itu%2C+1529+-+Jardins%2C+S%C3%A3o+Paulo">Salvar na agenda</a>
-      <a class="btn ghost" href="#confirmar">Confirmar presença</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o+de+anivers%C3%A1rio+%2B+Halloween+a+fantasia&dates=20261031T230000Z/20261101T060000Z&details=Festa+a+fantasia+no+O%27Malley%27s+a+partir+das+20h.+Nave+Pirata+%C3%A0s+20h30+e+Sondbroder+%C3%A0s+23h30.+Ingresso+antecipado+R%2469%2C+na+porta+R%2479.&location=O%27Malley%27s+Bar%2C+Alameda+Itu%2C+1529+-+Jardins%2C+S%C3%A3o+Paulo">Salvar na agenda</a>
+      <a class="btn ghost" href="#ingresso">Ver ingresso</a>
     </div>
   </header>
 
+  <section class="venue" aria-labelledby="local">
+    <span class="tag">Tudo no mesmo lugar</span>
+    <h2 id="local">O'Malley's Bar</h2>
+    <p class="time">A partir das 20h</p>
+    <p class="addr">Alameda Itu, 1529 · Jardins</p>
+    <a class="btn green" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=O%27Malley%27s+Bar+Alameda+Itu+1529+Jardins+S%C3%A3o+Paulo">Ver no mapa</a>
+  </section>
+
   <section aria-labelledby="atos">
-    <h2 class="section-title" id="atos" style="margin-bottom:14px">A noite em dois atos</h2>
+    <h2 class="section-title" id="atos" style="margin-bottom:14px">Duas bandas, dois atos</h2>
     <div class="acts">
       <article class="act one" id="act1" data-active="false">
-        <span class="act-tag">Ato I · Esquenta</span>
-        <h3>O'Malley's Bar</h3>
-        <p class="time">A partir das 20h</p>
-        <p class="addr">Alameda Itu, 1529 · Jardins</p>
-        <p class="note">Chega cedo pra gente pegar mesa junto.</p>
-        <a class="btn green" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=O%27Malley%27s+Bar+Alameda+Itu+1529+Jardins+S%C3%A3o+Paulo">Ver no mapa</a>
+        <span class="act-tag">Ato I</span>
+        <h3>Nave Pirata</h3>
+        <p class="time">20h30</p>
+        <p class="note">Abre a noite no palco do O'Malley's.</p>
       </article>
 
       <article class="act two" id="act2" data-active="false">
-        <span class="act-tag">Ato II · After · Halloween a fantasia</span>
-        <h3>Egrégora: Freakshow</h3>
-        <p class="time">A partir das 23h</p>
-        <p class="addr">Casa da Luz · Rua Mauá, 512 · Centro</p>
-        <p class="note">Capriche na fantasia. Ingresso comprado com antecedência.</p>
-        <a class="btn red" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Casa+da+Luz+Rua+Mau%C3%A1+512+Centro+S%C3%A3o+Paulo">Ver no mapa</a>
+        <span class="act-tag">Ato II</span>
+        <h3>Sondbroder</h3>
+        <p class="time">23h30</p>
+        <p class="note">Fecha a noite com o pub cheio.</p>
       </article>
     </div>
   </section>
 
   <section class="night" aria-labelledby="noite">
     <h2 class="section-title" id="noite">Arraste a noite</h2>
-    <p class="hint">Mova o marcador e veja onde a gente vai estar.</p>
+    <p class="hint">Mova o marcador e veja o que rola em cada hora.</p>
     <div class="clock" id="clock">20h</div>
     <p id="status" aria-live="polite"></p>
-    <input type="range" id="night" min="0" max="12" step="1" value="0" aria-label="Horário da noite, de 20h até a madrugada">
-    <div class="scale"><span>20h</span><span>23h</span><span>madrugada</span></div>
+    <input type="range" id="night" min="0" max="9" step="1" value="0" aria-label="Horário da noite, das 20h até depois da meia-noite">
+    <div class="scale"><span>20h</span><span>23h30</span><span>00h30</span></div>
   </section>
 
   <section class="ticket" id="ingresso" aria-labelledby="ing">
-    <span class="stamp">Admit one · só pro after</span>
-    <h2 id="ing">Sem ingresso, sem festa</h2>
-    <p>Quem vai pra festa precisa comprar o ingresso com antecedência.</p>
+    <span class="stamp">Admit one</span>
+    <h2 id="ing">Garanta o seu ingresso antes</h2>
+    <div class="prices">
+      <div class="price hot"><span class="l">Antecipado</span><span class="v">R$ 69</span></div>
+      <div class="price"><span class="l">Na porta</span><span class="v">R$ 79</span></div>
+    </div>
     <div class="perf" aria-hidden="true"></div>
-    <a class="btn" id="ticketBtn" target="_blank" rel="noopener" href="https://shotgun.live/events/egregora-freak-show?uhandle=brunoma190&utm_campaign=share_event&utm_term=brunoma190">Garantir ingresso no Shotgun</a>
+    <p>A venda antecipada é feita presencialmente no O'Malley's, ou por Pix, chamando o Bruno no WhatsApp.</p>
+  </section>
+
+  <section class="rules" aria-labelledby="regras">
+    <h2 class="section-title" id="regras">Sobre a fantasia</h2>
+    <div class="rule">
+      <span class="mark" aria-hidden="true">1</span>
+      <p>A fantasia <b>não é obrigatória</b>. Mas as primeiras 24 pessoas a chegar fantasiadas ganham uma cerveja <b>Ghost Ship</b> para o primeiro brinde.</p>
+    </div>
+    <div class="rule">
+      <span class="mark" aria-hidden="true">2</span>
+      <p><b>Capriche no look!</b> As melhores fantasias serão premiadas. O prêmio? Sem spoilers, por enquanto.</p>
+    </div>
   </section>
 
   <section class="rsvp" id="confirmar" aria-labelledby="conf">
-    <h2 class="section-title" id="conf">Sua entrada em cena</h2>
-    <p class="notice">Confirme sua presença pelo WhatsApp, para eu ter uma noção de quantos seremos no pub.</p>
-    <p class="costume-note">Capriche na fantasia ou sinta-se à vontade para ir sem e só curtir a noite.</p>
+    <svg class="cake" viewBox="0 0 100 100" aria-hidden="true">
+      <rect class="candle" x="28" y="30" width="5" height="20" rx="1"/>
+      <rect class="candle" x="47.5" y="26" width="5" height="24" rx="1"/>
+      <rect class="candle" x="67" y="30" width="5" height="20" rx="1"/>
+      <path class="flame" d="M30.5 16 C34 21 33.5 26 30.5 27 C27.5 26 27 21 30.5 16Z"/>
+      <path class="flame" d="M50 12 C53.5 17 53 22 50 23 C47 22 46.5 17 50 12Z"/>
+      <path class="flame" d="M69.5 16 C73 21 72.5 26 69.5 27 C66.5 26 66 21 69.5 16Z"/>
+      <rect class="body" x="14" y="50" width="72" height="36" rx="4"/>
+      <path class="icing" d="M14 54 a4 4 0 0 1 4-4 h64 a4 4 0 0 1 4 4 v6 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 q-4.5 6 -9 0 z"/>
+    </svg>
+    <h2 class="section-title" id="conf">Vem brindar comigo!</h2>
+    <p class="lead">Mais um ano merece boa música, mesa cheia e gente querida por perto. Sua presença é o melhor presente.</p>
+    <p class="notice">Confirme pelo WhatsApp, para eu ter uma noção de quantos seremos no pub.</p>
   </section>
 
-  <footer>31/10 · Jardins → Centro · venha curtir a noite ☘️🎪</footer>
+  <footer>Te espero no sábado, 31/10, no O'Malley's. Vai ser uma noite e tanto! ☘️🎂🎪</footer>
 </div>
 
 <script>
@@ -257,21 +309,18 @@ footer { text-align: center; font-family: var(--f-type); color: var(--bone-dim);
   tick();
   setInterval(tick, 30000);
 
-  /* linha do tempo */
+  /* linha do tempo: 20h até 00h30, de 30 em 30 minutos */
   var lines = [
-    "Chegando no O'Malley's. Quem vem cedo ajuda a juntar as mesas.",
-    'Primeiro pint e os primeiros brindes.',
-    'Mesa cheia, a noite esquentando.',
-    'Hora de rir alto e pedir mais uma rodada.',
-    'Última chamada de fotos antes de sair do pub.',
-    'Fecha a conta e pede o carro. O after começa em meia hora.',
-    'Portas abertas na Casa da Luz. Ingresso no celular!',
-    'Festa rolando. Hora de a fantasia brilhar.',
-    'Meia-noite no Centro. O espetáculo está só começando.',
-    'Pista, luz e gente esquisita, no bom sentido.',
-    'Já é domingo e ninguém quer ir embora.',
-    'Festa a todo vapor.',
-    'Quem sobrou é da família.'
+    "Portas abertas no O'Malley's. Chegue cedo para pegar mesa.",
+    'Nave Pirata sobe ao palco. Hora do primeiro brinde.',
+    'O pub enchendo e as fantasias aparecendo.',
+    'Mais uma rodada e mais uma foto.',
+    'Capriche no look: os melhores serão premiados.',
+    'A noite esquenta no O’Malley’s.',
+    'Falta pouco para a segunda banda.',
+    'Sondbroder sobe ao palco.',
+    'Meia-noite. O espetáculo continua.',
+    'Já é domingo e ninguém quer ir embora.'
   ];
   var slider = $('night');
   function updateNight() {
@@ -280,9 +329,8 @@ footer { text-align: center; font-family: var(--f-type); color: var(--bone-dim);
     var h = Math.floor(mins / 60) % 24, m = mins % 60;
     $('clock').textContent = pad(h) + 'h' + (m ? pad(m) : '');
     $('status').textContent = lines[i];
-    var atPub = i < 6;
-    $('act1').setAttribute('data-active', atPub ? 'true' : 'false');
-    $('act2').setAttribute('data-active', atPub ? 'false' : 'true');
+    $('act1').setAttribute('data-active', (i >= 1 && i <= 6) ? 'true' : 'false');
+    $('act2').setAttribute('data-active', i >= 7 ? 'true' : 'false');
   }
   slider.addEventListener('input', updateNight);
   updateNight();
